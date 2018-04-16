@@ -2,6 +2,9 @@ package edu.ap.spring.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Random;
+
+import org.springframework.data.annotation.Id;
 
 public class InhaalExamen implements Serializable {
 	
@@ -13,7 +16,7 @@ public class InhaalExamen implements Serializable {
 	 */
 	
 	private static final long serialVersionUID = 1L;
-
+	
 	private long id;
     private String student;
     private String exam;
@@ -22,18 +25,19 @@ public class InhaalExamen implements Serializable {
  
     public InhaalExamen() {
     		this.date = LocalDate.now().toString();
+    		this.id = new Random().nextLong();
     }
     
-    public InhaalExamen(Long id, String student, String exam, String reason, String date) {
-    		this.id = id;
+    public InhaalExamen(String student, String exam, String reason, String date) {
+    		this.id = new Random().nextLong();
     		this.student = student;
     		this.exam = exam;
     		this.reason = reason;
     	    this.date = date;
     }
     
-    public InhaalExamen(Long id, String student, String exam, String reason) {
-    	this.id = id;
+    public InhaalExamen(String student, String exam, String reason) {
+    	this.id = new Random().nextLong();
 		this.student = student;
 		this.exam = exam;
 		this.reason = reason;

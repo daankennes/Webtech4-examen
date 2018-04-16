@@ -39,10 +39,16 @@ public class InhaalExamenRepositoryImpl implements InhaalExamenRepository {
 	public InhaalExamen find(Long id) {
 		return hashOperations.get(KEY, id);
 	}
+	
+	/*@Override
+	public InhaalExamen findByStudent(string student) {
+		return hashOperations.get(KEY, id);
+	}*/
 
 	@Override
 	public Map<Long, InhaalExamen> findAll() {
-		return hashOperations.entries(KEY);
+		Map<Long, InhaalExamen> map = hashOperations.entries(KEY);
+		return map;
 	}
 
 	@Override
