@@ -1,5 +1,7 @@
 package edu.ap.spring.controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,36 +64,20 @@ public class WebController {
 	public String findByName(@RequestParam("student") String student) {
 		String result = "";
 		Map<Long, InhaalExamen> inhaalexamens = inhaalExamenRepository.findAll();
+		
+		ArrayList<InhaalExamen> alfabetisch = new ArrayList<InhaalExamen>();
 
 		for (InhaalExamen inhaalexamen : inhaalexamens.values()) {
-			if (inhaalexamen.getStudent().equals(student)) result += inhaalexamen.toString() + "<br>";
+			if (inhaalexamen.getStudent().equals(student)) alfabetisch.add(inhaalexamen);
+		}
+		
+		Collections.sort(alfabetisch, (o1, o2) -> o1.getReason().compareTo(o2.getReason()));
+		
+		for (InhaalExamen inhaalexamen : alfabetisch) {
+			result += inhaalexamen.toString() + "<br>";
 		}
 
 		return result;
 	}
 
-	/*@RequestMapping("/find")
-	public String findById(@RequestParam("id") Long id) {
-		String result = "";
-		result = customerRepository.find(id).toString();
-		return result;
-	}
-
-	@RequestMapping(value = "/uppercase")
-	public String postCustomer(@RequestParam("id") Long id) {
-		Customer customer = customerRepository.find(id);
-		customer.setFirstName(customer.getFirstName().toUpperCase());
-		customer.setLastName(customer.getLastName().toUpperCase());
-
-		customerRepository.update(customer);
-
-		return "Done";
-	}
-
-	@RequestMapping("/delete")
-	public String deleteById(@RequestParam("id") Long id) {
-		customerRepository.delete(id);
-
-		return "Done";
-	}*/
 }
